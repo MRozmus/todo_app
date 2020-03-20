@@ -1,9 +1,9 @@
 <h2>ToDo:</h4>
 <% @todos.each do |todo| %>
-  <h4><%= todo.title %></h4>
-  <h4><%= todo.description %></h4>
-  <h4><%= todo.priority %></h4>
-  <h4><%= todo.status %></h4>
+  <h4>Title: <%= todo.title %></h4>
+  <h4>Description: <%= todo.description %></h4>
+  <h4>Priority: <%= read_priority(todo.priority) %></h4>
+  <h4>Status: <%= read_status(todo.status) %></h4>
   <%= link_to "Show", todo_path(todo.id) %>
   <%= link_to "Edit", edit_todo_path(todo.id) %>
   <%= link_to "Delete", todo_path(todo.id), method: :delete, data: { confirm: "Do you really want to delete #{todo.title}?"} %>
