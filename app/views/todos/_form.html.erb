@@ -1,0 +1,10 @@
+<%= form_with model: @todo do |form| %>
+  <%= form.label :title%>
+  <%= form.text_field :title %></br>
+  <%= form.label :description%>
+  <%= form.text_area :description %></br>
+  <%= form.select :priority, options_for_select([["Low", 0], ["Medium", 1], ["High", 2]])%></br>
+  <%= form.hidden_field :status, value: false %>
+  <%= form.hidden_field :guest_id, value: session[:guest_id] %>
+  <%= form.submit %>
+<% end %>

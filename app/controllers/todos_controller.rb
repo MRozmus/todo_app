@@ -1,2 +1,56 @@
 class TodosController < ApplicationController
+  before_action :set_guest
+
+  def index
+    @todos = Guest.find(session[:guest_id]).todos
+  end
+
+  def show
+    @todo = Todo.find(params[:id])
+  end
+
+  def new
+    @todo = Todo.new
+  end
+
+  def create
+    todo = Todo.new(todo_params)
+    if todo.save
+      redirect_to todo_path(todo.id)
+    else
+      redirect_to new_todo_path
+    end
+  end
+
+  def edit
+    @todo = Todo.find(params[:id])
+  end
+
+  def update
+    todo = Todo.find(params[:id])
+    if todo.update(todo_params)
+      redirect_to todo_path(todo.id)
+    else
+      redirect_to edit_todo_path(todo.id)
+    end
+  end
+
+  def destroy
+    todo = Todo.find(params[:id])
+    todo.destroy
+    redirect_to todos_path
+  end
+
+  private
+
+  def set_guest
+    if session[:guest_id].nil?
+      guest = Guest.create
+      session[:guest_id] = guest.id
+    end
+  end
+
+  def todo_params
+    params.require(:todo).permit(:title, :description, :priority, :status, :guest_id)
+  end
 end
