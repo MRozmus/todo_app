@@ -1,12 +1,12 @@
 class TodosController < ApplicationController
   before_action :set_guest
+  before_action :todo_find, only: [:show, :edit]
 
   def index
     @todos = Guest.find(session[:guest_id]).todos
   end
 
   def show
-    @todo = Todo.find(params[:id])
   end
 
   def new
@@ -23,7 +23,6 @@ class TodosController < ApplicationController
   end
 
   def edit
-    @todo = Todo.find(params[:id])
   end
 
   def update
@@ -52,5 +51,10 @@ class TodosController < ApplicationController
 
   def todo_params
     params.require(:todo).permit(:title, :description, :priority, :status, :guest_id)
+  end
+
+  def todo_find
+    @todo = Todo.find(params[:id])
+    redirect_to todos_path if @todo.guest.id != session[:guest_id]
   end
 end
