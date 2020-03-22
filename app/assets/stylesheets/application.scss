@@ -15,3 +15,30 @@
  */
 
  @import "bootstrap/scss/bootstrap";
+
+ .bg-form{
+  background: #f7f7f7;
+}
+
+.bg-card-done{
+  background: #c3ed85;
+}
+
+.bg-prio-low{
+  background: #ffff4560;
+}
+
+.bg-prio-medium{
+  background: #ffa24560;
+}
+
+.bg-prio-high{
+  background: #ff454560;
+}
+
+.span-prio {
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  z-index: 1;
+}

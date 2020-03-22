@@ -1,11 +1,13 @@
+<div class="card p-3 mt-3 bg-form">
 <%= form_with model: @todo do |form| %>
   <%= form.label :title %>
-  <%= form.text_field :title %></br>
+  <%= form.text_field :title, class: "form-control mb-1" %>
   <%= form.label :description %>
-  <%= form.text_area :description %></br>
+  <%= form.text_area :description, class: "form-control mb-1" %>
   <%= form.label :priority %>
-  <%= form.select :priority, options_for_select([["Low", 0], ["Medium", 1], ["High", 2]]) %></br>
+  <%= form.select :priority, options_for_select([["Low", 0], ["Medium", 1], ["High", 2]]), {}, {class: "form-control"} %>
   <%= form.hidden_field :status, value: false %>
   <%= form.hidden_field :guest_id, value: session[:guest_id] %>
-  <%= form.submit %>
+  <%= form.submit class: "btn btn-info btn-block mt-3" %>
 <% end %>
+</div>

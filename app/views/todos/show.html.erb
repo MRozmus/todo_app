@@ -1,5 +1,18 @@
-<h4>Title: <%= @todo.title %></h4>
-<h4>Description: <%= @todo.description %></h4>
-<h4>Priority: <%= read_priority(@todo.priority) %></h4>
-<h4>Status: <%= read_status(@todo.status) %></h4>
-<%= link_to "Home", todos_path %>
+<div class="container">
+  <div class="card text-center mt-3">
+    <div class="card-header <%= bg_status(@todo.status) %>">
+      <%= read_status(@todo.status) %>
+    </div>
+    <div class="card-body <%= bg_priority(@todo.priority) %>">
+      <h5 class="card-title"><%= @todo.title %></h5>
+      <p class="card-text"><%= @todo.description %></p>
+      <%= link_to "Back", todos_path, class: "btn btn-primary mx-1" %>
+      <%= link_to "Edit", edit_todo_path(@todo.id), class: "btn btn-dark mx-1" %>
+      <%= link_to "Delete", todo_path(@todo.id), method: :delete, data: { confirm: "Do you want to delete #{@todo.title}"}, class: "btn btn-danger mx-1" %>
+      <span class="badge span-prio mt-5"><%= read_priority(@todo.priority) %></span>
+    </div>
+    <div class="card-footer <%= bg_status(@todo.status) %>">
+      <%= time_ago(@todo.created_at) %>
+    </div>
+  </div>
+</div>
