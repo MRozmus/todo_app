@@ -1,6 +1,6 @@
 class TodosController < ApplicationController
   before_action :set_guest
-  before_action :todo_find, only: [:show, :edit]
+  before_action :todo_find, only: [:show, :edit, :status]
 
   def index
     @todos = Guest.find(session[:guest_id]).todos
@@ -37,6 +37,11 @@ class TodosController < ApplicationController
   def destroy
     todo = Todo.find(params[:id])
     todo.destroy
+    redirect_to todos_path
+  end
+
+  def status
+    @todo.update(status: @todo.status == false ? true : false)
     redirect_to todos_path
   end
 

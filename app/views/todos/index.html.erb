@@ -7,8 +7,9 @@
       <% @todos.where(status: false).each do |todo| %>
         <li class="list-group-item <%= bg_priority(todo.priority) %>">
           <div class="row">
-            <div class="font-weight-bolder text-capitalize text-truncate col-10"><%= todo.title %></div>
+            <div class="font-weight-bolder text-capitalize text-truncate col-7"><%= todo.title %></div>
             <%= link_to "Show", todo_path(todo.id), class: "btn btn-primary ml-auto col-2" %>
+            <%= link_to "Done", status_path(todo.id), method: :post, class: "btn btn-secondary ml-auto col-2" %>
           </div>
           <span class="badge span-prio text-muted">Priority: <%= read_priority(todo.priority) %></span>
         </li>
@@ -23,8 +24,9 @@
       <% @todos.where(status: true).each do |todo| %>
         <li class="list-group-item <%= bg_priority(todo.priority) %>">
           <div class="row">
-            <div class="font-weight-bolder text-capitalize text-truncate col-10"><%= todo.title %></div>
+            <div class="font-weight-bolder text-capitalize text-truncate col-7"><%= todo.title %></div>
             <%= link_to "Show", todo_path(todo.id), class: "btn btn-primary ml-auto col-2" %>
+            <%= link_to "ToDo", status_path(todo.id), method: :post, class: "btn btn-secondary ml-auto col-2" %>
           </div>
           <span class="badge span-prio text-muted">Priority: <%= read_priority(todo.priority) %></span>
         </li>
