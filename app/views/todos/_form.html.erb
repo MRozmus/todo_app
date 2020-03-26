@@ -6,7 +6,7 @@
   <%= form.text_area :description, class: "form-control mb-1" %>
   <%= form.label :priority %>
   <%= form.select :priority, options_for_select([["Low", 0], ["Medium", 1], ["High", 2]]), {}, {class: "form-control"} %>
-  <%= form.hidden_field :status, value: false %>
+  <%= form.hidden_field :status, value: @todo.status.nil? == true ? false : true %>
   <%= form.hidden_field :guest_id, value: session[:guest_id] %>
   <%= form.submit class: "btn btn-info btn-block mt-3" %>
 <% end %>
