@@ -1,9 +1,9 @@
 class TodosController < ApplicationController
   before_action :set_guest
   before_action :todo_find, only: [:show, :edit, :status]
+  before_action :todos_find, only: [:index, :status]
 
   def index
-    @todos = Guest.find(session[:guest_id]).todos
   end
 
   def show
@@ -42,7 +42,6 @@ class TodosController < ApplicationController
 
   def status
     @todo.update(status: @todo.status == false ? true : false)
-    redirect_to todos_path
   end
 
   private
@@ -61,5 +60,9 @@ class TodosController < ApplicationController
   def todo_find
     @todo = Todo.find(params[:id])
     redirect_to todos_path if @todo.guest.id != session[:guest_id]
+  end
+
+  def todos_find
+    @todos = Guest.find(session[:guest_id]).todos
   end
 end

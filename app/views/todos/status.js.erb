@@ -1,0 +1,4 @@
+while (todos.hasChildNodes()) {  
+  todos.removeChild(todos.firstChild);
+}
+todos.innerHTML = "<%= j render partial: "todos/todos", locals: { render_name: "To Do", render_status: false, render_btn_name: [10003].pack('U*'), render_btn_class: "success" } %><%= j render partial: "todos/todos", locals: { render_name: "Done", render_status: true, render_btn_name: [10005].pack('U*'), render_btn_class: "danger" } %>";
