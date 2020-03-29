@@ -16,8 +16,10 @@ class TodosController < ApplicationController
   def create
     todo = Todo.new(todo_params)
     if todo.save
+      flash[:notice] = "#{todo.title} added!"
       redirect_to todo_path(todo.id)
     else
+      flash[:alert] = todo.errors.full_messages
       redirect_to new_todo_path
     end
   end
@@ -28,8 +30,10 @@ class TodosController < ApplicationController
   def update
     todo = Todo.find(params[:id])
     if todo.update(todo_params)
+      flash[:notice] = "#{todo.title} edited!"
       redirect_to todo_path(todo.id)
     else
+      flash[:alert] = todo.errors.full_messages
       redirect_to edit_todo_path(todo.id)
     end
   end
@@ -37,11 +41,13 @@ class TodosController < ApplicationController
   def destroy
     todo = Todo.find(params[:id])
     todo.destroy
+    flash[:notice] = "#{todo.title} deleted!"
     redirect_to todos_path
   end
 
   def status
     @todo.update(status: @todo.status == false ? true : false)
+    flash.now[:notice] = "#{@todo.title} #{@todo.status == false ? "to do!" : "done!"}"
   end
 
   private
