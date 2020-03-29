@@ -3,12 +3,12 @@
     <span class="font-weight-bold"><%= render_name %></span>
   </div>
   <ul class="list-group list-group-flush">
-    <% @todos.where(status: render_status).each do |todo| %>
+    <% @todos.where(status: render_status).order(@sort).each do |todo| %>
       <li class="list-group-item <%= bg_priority(todo.priority) %>">
         <div class="row">
           <div class="font-weight-bolder text-capitalize text-truncate col-6 col-sm-7"><%= todo.title %></div>
           <%= link_to "Show", todo_path(todo.id), class: "btn btn-primary ml-auto col-3" %>
-          <%= button_to "#{render_btn_name}", status_path(todo.id), method: :put, remote: true, class: "btn btn-#{render_btn_class} col-12", form_class: "col-3 col-sm-2" %>
+          <%= button_to "#{render_btn_name}", status_path(todo.id), method: :put, remote: true, params: {sort: @sort}, class: "btn btn-#{render_btn_class} col-12", form_class: "col-3 col-sm-2" %>
         </div>
         <span class="badge span-prio text-muted">Priority: <%= read_priority(todo.priority) %></span>
       </li>

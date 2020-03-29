@@ -1,4 +1,17 @@
 <div class="container">
+<div class="dropdown btn-sort">
+  <button class="btn btn-light dropdown-toggle rounded-pill border" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Sort
+  </button>
+  <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+    <%= link_to "Title (A-Z)", todos_path(sort: "title"), class: "dropdown-item" %>
+    <%= link_to "Title (Z-A)", todos_path(sort: "title desc"), class: "dropdown-item" %>
+    <%= link_to "Priority (High)", todos_path(sort: "priority desc"), class: "dropdown-item" %>
+    <%= link_to "Priority (Low)", todos_path(sort: "priority"), class: "dropdown-item" %>
+    <%= link_to "Date (New)", todos_path(sort: "created_at desc"), class: "dropdown-item" %>
+    <%= link_to "Date (Old)", todos_path(sort: "created_at"), class: "dropdown-item" %>
+  </div>
+</div>
   <div id="todos">
     <%= render partial: "todos/todos", locals: { render_name: "To Do", render_status: false, render_btn_name: [10003].pack('U*'), render_btn_class: "success" } %>
     <%= render partial: "todos/todos", locals: { render_name: "Done", render_status: true, render_btn_name: [10005].pack('U*'), render_btn_class: "danger" } %>

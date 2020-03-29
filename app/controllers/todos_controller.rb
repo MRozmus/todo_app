@@ -1,7 +1,8 @@
 class TodosController < ApplicationController
   before_action :set_guest
   before_action :todo_find, only: [:show, :edit, :status]
-  before_action :todos_find, only: [:index, :status]
+  before_action :todos_find, :todos_sort, only: [:index, :status]
+
 
   def index
   end
@@ -70,5 +71,14 @@ class TodosController < ApplicationController
 
   def todos_find
     @todos = Guest.find(session[:guest_id]).todos
+  end
+
+  def todos_sort
+    if params[:sort]
+      params[:sort] = "title" unless ["title", "title desc", "priority", "priority desc", "created_at", "created_at desc"].include?(params[:sort])
+      @sort = params[:sort]
+    else
+      @sort = "title"
+    end
   end
 end
