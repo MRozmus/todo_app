@@ -13,7 +13,7 @@
   </div>
 </div>
   <div id="todos">
-    <%= render partial: "todos/todos", locals: { render_name: "To Do", render_status: false, render_btn_name: [10003].pack('U*'), render_btn_class: "success" } %>
-    <%= render partial: "todos/todos", locals: { render_name: "Done", render_status: true, render_btn_name: [10005].pack('U*'), render_btn_class: "danger" } %>
+    <%= render partial: "todos/todos", locals: { render_name: "To Do", render_status: false, render_btn_name: [10003].pack('U*'), render_btn_class: "success", render_bg: "" } %>
+    <%= render partial: "todos/todos", locals: { render_name: "Done", render_status: true, render_btn_name: [10005].pack('U*'), render_btn_class: "danger", render_bg: "bg-card-done" } %>
   </div>
 </div>
