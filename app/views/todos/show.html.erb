@@ -5,7 +5,7 @@
     </div>
     <div class="card-body <%= bg_priority(@todo.priority) %>">
       <h5 class="card-title"><%= @todo.title %></h5>
-      <p class="card-text"><%= @todo.description %></p>
+      <%= simple_format(@todo.description, class: "card-text") %>
       <%= link_to "Back", todos_path, class: "btn btn-primary mx-1" %>
       <%= link_to "Edit", edit_todo_path(@todo.id), class: "btn btn-dark mx-1" %>
       <%= render "todos/delete_modal" %>
