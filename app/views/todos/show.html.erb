@@ -8,7 +8,7 @@
       <p class="card-text"><%= @todo.description %></p>
       <%= link_to "Back", todos_path, class: "btn btn-primary mx-1" %>
       <%= link_to "Edit", edit_todo_path(@todo.id), class: "btn btn-dark mx-1" %>
-      <%= link_to "Delete", todo_path(@todo.id), method: :delete, data: { confirm: "Do you want to delete #{@todo.title}?"}, class: "btn btn-danger mx-1" %>
+      <%= render "todos/delete_modal" %>
       <span class="badge span-prio mt-5 text-muted">Priority: <%= read_priority(@todo.priority) %></span>
     </div>
     <div class="card-footer <%= bg_status(@todo.status) %>">
