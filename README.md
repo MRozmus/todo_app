@@ -1,24 +1,31 @@
-# README
+# ToDo app
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple todo app where we can save our tasks.
 
-Things you may want to cover:
 
-* Ruby version
+Features:
 
-* System dependencies
+* Every visitor has his own model(guest.rb) record stored in session
 
-* Configuration
+* Guest model has many task(todo.rb) records
 
-* Database creation
+* Visitor has ability to CRUD task
 
-* Database initialization
+* Visitor can't access to other visitors task records
 
-* How to run the test suite
+* Bootstrap views
 
-* Services (job queues, cache servers, search engines, etc.)
+* Visitor can change task attribute(status)
 
-* Deployment instructions
+* Some templates are render by AJAX
 
-* ...
+
+Upcoming features:
+
+* Set guest model expire time
+
+* Add pagination (Kaminari)
+
+* Add authentication system (Devise)
+
+* Add ability to share tasks with other users
