@@ -49,3 +49,11 @@
   top: 8px;
   z-index: 1;
 }
+
+html {
+  @extend .h-100;
+}
+  
+body {
+  @extend .d-flex, .flex-column, .h-100;
+}
