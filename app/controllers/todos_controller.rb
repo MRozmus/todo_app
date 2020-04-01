@@ -21,7 +21,6 @@ class TodosController < ApplicationController
       redirect_to todo_path(todo.id)
     else
       flash[:alert] = todo.errors.full_messages
-      redirect_to new_todo_path
     end
   end
 
