@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :todos
   root to: "todos#index"
   put "/status/:id", to: "todos#status", as: "status"
