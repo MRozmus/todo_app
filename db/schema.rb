@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_04_08_175636) do
     t.text "description"
     t.integer "priority"
     t.boolean "status"
-    t.bigint "guest_id", null: false
+    t.bigint "guest_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "user_id"
