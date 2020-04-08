@@ -20,7 +20,7 @@ class TodosController < ApplicationController
       flash[:notice] = "#{todo.title} added!"
       redirect_to todo_path(todo.id)
     else
-      flash[:alert] = todo.errors.full_messages
+      flash.now[:alert] = todo.errors.full_messages
     end
   end
 
