@@ -74,7 +74,7 @@ class TodosController < ApplicationController
 
   def todos_sort
     if params[:sort]
-      params[:sort] = "title" unless ["title", "title desc", "priority", "priority desc", "created_at", "created_at desc"].include?(params[:sort])
+      params[:sort] = "title" unless Todo::SORT.include?(params[:sort])
       @sort = params[:sort]
     else
       @sort = "title"
