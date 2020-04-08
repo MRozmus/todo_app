@@ -60,16 +60,24 @@ class TodosController < ApplicationController
   end
 
   def todo_params
-    params.require(:todo).permit(:title, :description, :priority, :status, :guest_id)
+    params.require(:todo).permit(:title, :description, :priority, :status, :guest_id, :user_id)
   end
 
   def todo_find
     @todo = Todo.find(params[:id])
-    redirect_to todos_path if @todo.guest.id != session[:guest_id]
+    if user_signed_in?
+      redirect_to todos_path if @todo.user_id != current_user.id
+    else
+      redirect_to todos_path if @todo.guest.id != session[:guest_id]
+    end
   end
 
   def todos_find
-    @todos = Guest.find(session[:guest_id]).todos
+    if user_signed_in?
+      @todos = Todo.where(user_id: current_user.id)
+    else
+      @todos = Guest.find(session[:guest_id]).todos
+    end
   end
 
   def todos_sort
