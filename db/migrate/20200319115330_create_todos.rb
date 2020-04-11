@@ -5,7 +5,7 @@ class CreateTodos < ActiveRecord::Migration[6.0]
       t.text :description
       t.integer :priority
       t.boolean :status
-      t.references :guest, foreign_key: true
+      t.references :guest
 
       t.timestamps
     end
