@@ -1,0 +1,7 @@
+<div class="alert alert-warning alert-dismissible fade show fixed-bottom text-center" role="alert">
+  Session expire in <strong><%= time_display(86399 - (Time.now.to_i - Guest.find(session[:guest_id]).created_at.to_i)) %></strong>. 
+  To avoid losing Your todo list <%= link_to "create account", new_user_registration_path, class: "alert-link" %>.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
