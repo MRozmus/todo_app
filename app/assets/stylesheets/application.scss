@@ -50,3 +50,7 @@ html {
 body {
   @extend .d-flex, .flex-column, .h-100;
 }
+
+@media all and (max-width:991px) {
+  .btn-lg-block { width: 100%; display:block; }
+}

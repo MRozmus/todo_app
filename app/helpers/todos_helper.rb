@@ -50,4 +50,8 @@ module TodosHelper
     end
   end
 
+  def active_sort_link(sort)
+    "active" if sort == params[:sort]
+  end
+
 end
