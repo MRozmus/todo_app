@@ -12,7 +12,7 @@
       <span class="badge span-prio mt-5 text-muted">Priority: <%= read_priority(@todo.priority) %></span>
     </div>
     <div class="card-footer <%= bg_status(@todo.status) %>">
-      <%= time_ago(@todo.created_at) %>
+      <%= time_display(Time.now.to_i - @todo.created_at.to_i) %> ago
     </div>
   </div>
 </div>
