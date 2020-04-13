@@ -15,7 +15,7 @@
     <%= render "layouts/navbar" %>
     <div class="container" id="popup"><%= render "layouts/popup" %></div>
     <%= yield %>
-    <%= render "todos/guest_time" unless user_signed_in? %>
+    <%= render "layouts/guest_time" unless user_signed_in? %>
     <%= render "layouts/footer" %>
   </body>
 </html>

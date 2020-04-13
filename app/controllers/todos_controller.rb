@@ -1,5 +1,4 @@
 class TodosController < ApplicationController
-  before_action :set_guest
   before_action :todo_find, only: [:show, :edit, :status]
   before_action :todos_find, :todos_sort, only: [:index, :status]
 
@@ -52,14 +51,6 @@ class TodosController < ApplicationController
 
   private
 
-  def set_guest
-    guest_expire
-    if session[:guest_id].nil?
-      guest = Guest.create
-      session[:guest_id] = guest.id
-    end
-  end
-
   def todo_params
     params.require(:todo).permit(:title, :description, :priority, :status, :guest_id, :user_id)
   end
@@ -90,16 +81,4 @@ class TodosController < ApplicationController
     end
   end
 
-  def guest_expire
-    unless session[:guest_id].nil?
-      guest = Guest.find(session[:guest_id])
-      if (Time.now.to_i - guest.created_at.to_i) > 86399
-        guest.todos.each do |todo|
-          todo.delete if todo.user_id == nil
-        end
-        guest.delete
-        session[:guest_id] = nil
-      end
-    end
-  end
 end
