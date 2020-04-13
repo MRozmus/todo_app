@@ -43,17 +43,18 @@
   z-index: 1;
 }
 
-.btn-sort {
-  position: absolute;
-  right: 8px;
-  top: 8px;
-  z-index: 1;
-}
-
 html {
   @extend .h-100;
 }
   
 body {
   @extend .d-flex, .flex-column, .h-100;
+}
+
+@media all and (max-width:991px) {
+  .btn-lg-block { width: 100%; display:block; }
+}
+
+.alert {
+  margin-bottom: 0;
 }

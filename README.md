@@ -19,13 +19,13 @@ Features:
 
 * Some templates are render by AJAX
 
+* Guest model expire after 24 hours
+
+* Authentication system (Devise)
+
 
 Upcoming features:
 
-* Set guest model expire time
-
 * Add pagination (Kaminari)
-
-* Add authentication system (Devise)
 
 * Add ability to share tasks with other users

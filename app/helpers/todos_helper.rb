@@ -19,23 +19,23 @@ module TodosHelper
     "bg-card-done" if status == true
   end
 
-  def time_ago(time)
-    seconds = Time.now.to_i - time.to_i
+  def time_display(time)
+    seconds = time
     if seconds / 60 >= 1
       minutes = seconds / 60
       if minutes / 60 >= 1
         hours = minutes / 60
-        if hours / 60 >= 1
+        if hours / 24 >= 1
           days = hours / 24
-          return (days == 1 ? "1 day" : "#{days} days") + "#{hours} h ago"
+          return (days == 1 ? "1 day" : "#{days} days") + " #{hours % 24} h"
         else
-          return "#{hours} h #{minutes % 60} min ago"
+          return "#{hours} h #{minutes % 60} min"
         end
       else
-        return "#{minutes} min #{seconds % 60} sec ago"
+        return "#{minutes} min #{seconds % 60} sec"
       end
     else
-    return "#{seconds} sec ago"
+    return "#{seconds} sec"
     end
   end
 
@@ -48,6 +48,10 @@ module TodosHelper
     when 2
       "bg-prio-high"
     end
+  end
+
+  def active_sort_link(sort)
+    "active" if sort == params[:sort]
   end
 
 end

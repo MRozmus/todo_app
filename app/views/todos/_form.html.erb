@@ -7,7 +7,8 @@
   <%= form.label :priority %>
   <%= form.select :priority, options_for_select([["Low", 0], ["Medium", 1], ["High", 2]], @todo.priority), {}, {class: "form-control"} %>
   <%= form.hidden_field :status, value: @todo.status.nil? ? false : @todo.status %>
-  <%= form.hidden_field :guest_id, value: session[:guest_id] %>
+  <%= form.hidden_field :guest_id, value: session[:guest_id] unless user_signed_in? %>
+  <%= form.hidden_field :user_id, value: current_user.id if user_signed_in? %>
   <%= form.submit class: "btn btn-info btn-block mt-3" %>
 <% end %>
 </div>

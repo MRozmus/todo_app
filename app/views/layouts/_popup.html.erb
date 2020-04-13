@@ -1,10 +1,12 @@
 <% if flash[:notice] || flash[:alert] %>
-  <div class="alert alert-<%= flash[:notice] ? "success" : "danger" %> alert-dismissible fade show text-truncate" role="alert">
+  <div class="alert alert-<%= flash[:notice] ? "success" : "danger" %> alert-dismissible fade show" role="alert">
     <%= flash[:notice] if flash[:notice] %>
-    <% if flash[:alert] %>
+    <% if flash[:alert].class == Array %>
       <% flash[:alert].each do |e| %>
         <%= "- #{e}" %><br>
       <% end %>
+    <% else %>
+      <%= flash[:alert] %>
     <% end %>
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
       <span aria-hidden="true">&times;</span>
