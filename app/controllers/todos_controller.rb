@@ -49,6 +49,13 @@ class TodosController < ApplicationController
     flash.now[:notice] = "#{@todo.title} #{@todo.status == false ? "to do!" : "done!"}"
   end
 
+  def migrate
+    todos = Todo.where(guest_id: session[:guest_id], user_id: nil)
+    todos.each {|todo| todo.update(guest_id: nil ,user_id: current_user.id)}
+    flash[:notice] = "Todos migrated!"
+    redirect_to todos_path
+  end
+
   private
 
   def todo_params

@@ -54,4 +54,8 @@ module TodosHelper
     "active" if sort == params[:sort]
   end
 
+  def todos_migrate?
+    user_signed_in? && Todo.where(guest_id: session[:guest_id]).find_by(user_id: nil).present?
+  end
+
 end

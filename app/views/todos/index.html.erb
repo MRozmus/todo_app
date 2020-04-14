@@ -1,4 +1,16 @@
 <div class="container">
+  <% if todos_migrate? %>
+    <button class="btn btn-info btn-sm btn-block mt-3" type="button" data-toggle="collapse" data-target="#collapseMigrate" aria-expanded="false" aria-controls="collapseMigrate">
+      Want to migrate?
+    </button>
+    <div class="collapse" id="collapseMigrate">
+      <div class="card card-body text-center">
+        We found that you have todos in Your session which aren't assigned with Your account!<br>
+        To migrate them to Your account click the button bellow!
+        <%= button_to "Migrate", migrate_path, method: :put, class: "btn btn-secondary btn-sm col-12 col-sm-8 col-md-6" %>
+      </div>
+    </div>
+  <% end %>
   <div id="todos">
     <%= render partial: "todos/todos", locals: { render_name: "To Do", render_status: false, render_btn_name: [10003].pack('U*'), render_btn_class: "success", render_bg: "" } %>
     <%= render partial: "todos/todos", locals: { render_name: "Done", render_status: true, render_btn_name: [10005].pack('U*'), render_btn_class: "danger", render_bg: "bg-card-done" } %>
