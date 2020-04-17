@@ -1,0 +1,36 @@
+<div class="container">
+  <% if @relations_false.present? %>
+    <button class="btn btn-info btn-sm btn-block mt-3" type="button" data-toggle="collapse" data-target="#collapseInvitations" aria-expanded="false" aria-controls="collapseInvitations">
+      Invitations
+    </button>
+    <div class="collapse" id="collapseInvitations">
+      <% @relations_false.each do |relation| %>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center"><%= User.find(relation.sender_id).email %></h5>
+            <div class="row justify-content-center">
+              <%= button_to "Accept", status_friend_path, params: {relation_id: relation.id}, method: :put, class: "btn btn-success btn-sm mr-2" %>
+              <%= button_to "Discard", friend_path(User.find(relation.sender_id).id), method: :delete, class: "btn btn-danger btn-sm ml-2" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="card my-3">
+    <div class="card-header text-center">
+      <span class="font-weight-bold">Friends</span>
+    </div>
+    <ul class="list-group list-group-flush">
+      <% @friends.each do |friend| %>
+        <li class="list-group-item">
+          <div class="row">
+            <div class="font-weight-bolder text-capitalize text-truncate col-7 col-sm-8"><%= friend.email %></div>
+            <%= link_to "show", friend_path(friend.id), class: "btn btn-primary ml-auto col-3" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <%= link_to 'Add friend', new_friend_path, class: "btn btn-success btn-block mt-3" %>
+</div>

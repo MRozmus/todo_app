@@ -5,4 +5,7 @@ Rails.application.routes.draw do
   put "/status/:id", to: "todos#status", as: "status"
   post "/status/:id", to: "todos#status"
   put "/migrate", to: "todos#migrate", as: "migrate"
+  resources :friends, except: [:edit, :update]
+  put "/friends/status", to: "friends#status", as: "status_friend"
+  post "/friends/status", to: "friends#status"
 end

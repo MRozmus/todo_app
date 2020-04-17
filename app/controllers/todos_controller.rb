@@ -63,11 +63,15 @@ class TodosController < ApplicationController
   end
 
   def todo_find
-    @todo = Todo.find(params[:id])
-    if user_signed_in?
-      redirect_to todos_path if @todo.user_id != current_user.id
+    if Todo.find_by(id: params[:id]).present?
+      @todo = Todo.find(params[:id])
+      if user_signed_in?
+        redirect_to todos_path if @todo.user_id != current_user.id
+      else
+        redirect_to todos_path if @todo.guest.id != session[:guest_id]
+      end
     else
-      redirect_to todos_path if @todo.guest.id != session[:guest_id]
+      redirect_to todos_path
     end
   end
 
