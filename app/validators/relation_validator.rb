@@ -3,7 +3,7 @@ class RelationValidator < ActiveModel::Validator
     if record.sender_id == record.receiver_id
       record.errors[:base] << "Sender email is equal to receiver's"
     end
-    if Relation.find_by(sender_id: record.sender_id, receiver_id: record.receiver_id, status: false).present?
+    if Relation.find_by(sender_id: record.sender_id, receiver_id: record.receiver_id).present? && record.status == false
       record.errors[:base] << "Request was sent already"
     end
     if Relation.find_by(sender_id: record.receiver_id, receiver_id: record.sender_id, status: false).present?
