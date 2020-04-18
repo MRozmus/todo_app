@@ -1,6 +1,7 @@
 class TodosController < ApplicationController
   before_action :todo_find, only: [:show, :edit, :status]
   before_action :todos_find, :todos_sort, only: [:index, :status]
+  before_action :friends_find, only: :show
 
 
   def index
@@ -45,8 +46,14 @@ class TodosController < ApplicationController
   end
 
   def status
-    @todo.update(status: @todo.status == false ? true : false)
-    flash.now[:notice] = "#{@todo.title} #{@todo.status == false ? "to do!" : "done!"}"
+    if params[:from] == "share"
+      @todo.update(status: @todo.status == false ? true : false)
+      flash[:notice] = "#{@todo.title} #{@todo.status == false ? "to do!" : "done!"}"
+      redirect_to shares_path
+    else
+      @todo.update(status: @todo.status == false ? true : false)
+      flash.now[:notice] = "#{@todo.title} #{@todo.status == false ? "to do!" : "done!"}"
+    end
   end
 
   def migrate
@@ -66,7 +73,7 @@ class TodosController < ApplicationController
     if Todo.find_by(id: params[:id]).present?
       @todo = Todo.find(params[:id])
       if user_signed_in?
-        redirect_to todos_path if @todo.user_id != current_user.id
+        redirect_to todos_path if @todo.user_id != current_user.id && Share.find_by(sharer_id: @todo.user_id, todo_id: @todo.id, receiver_id: current_user.id).nil?
       else
         redirect_to todos_path if @todo.guest.id != session[:guest_id]
       end
@@ -90,6 +97,16 @@ class TodosController < ApplicationController
     else
       @sort = "title"
     end
+  end
+
+  def friends_find
+    relations_true = Relation.where(sender_id: current_user.id, status: true).or(Relation.where(receiver_id: current_user.id, status: true))
+    @relations_false = Relation.where(receiver_id: current_user.id, status: false)
+    friends_id = []
+    relations_true.each do |relation|
+      relation.sender_id == current_user.id ? friends_id << relation.receiver_id : friends_id << relation.sender_id
+    end
+    @friends = User.where(id: friends_id)
   end
 
 end

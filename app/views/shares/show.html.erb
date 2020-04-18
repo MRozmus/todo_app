@@ -6,11 +6,13 @@
     <div class="card-body <%= bg_priority(@todo.priority) %>">
       <h5 class="card-title font-weight-bold"><%= @todo.title %></h5>
       <%= simple_format(@todo.description, class: "card-text") %>
-      <%= link_to "Back", params[:friend].nil? ? todos_path : friend_path(params[:friend]) , class: "btn btn-primary m-1" %>
-      <%= link_to "Edit", edit_todo_path(@todo.id), class: "btn btn-dark m-1" %>
-      <%= render "shares/todo_share_modal" %>
-      <%= render "todos/delete_modal" %>
-      <span class="badge span-prio mt-5 text-muted">Priority: <%= read_priority(@todo.priority) %><%= todo_share?(@todo.id) %></span>
+      <div class="row justify-content-center">
+        <%= link_to "Back", shares_path, class: "btn btn-primary m-1" %>
+        <%= button_to read_status(!@todo.status), status_path(@todo.id), method: :put, params: {from: "share"}, class: "btn btn-secondary m-1" %>
+        <%= render "shares/dismiss_modal" %>
+      </div>
+      <span class="badge span-prio mt-5 text-muted">Priority: <%= read_priority(@todo.priority) %></span>
+      <span class="badge span-prio-r mt-5 text-muted"><%= User.find_by(id: @todo.user_id).email %></span>
     </div>
     <div class="card-footer <%= bg_status(@todo.status) %>">
       <%= time_display(Time.now.to_i - @todo.created_at.to_i) %> ago

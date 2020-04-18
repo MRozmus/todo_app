@@ -1,0 +1,31 @@
+<button type="button" class="btn btn-info m-1" data-toggle="modal" data-target="#modalShare">
+  Share
+</button>
+<div class="modal fade" id="modalShare" tabindex="-1" role="dialog" aria-labelledby="modalShareLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalShareLabel">Choose friend</h5>
+        <button type="button" class="btn" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <% @friends.each do |friend| %>
+          <li class="list-group-item">
+            <div class="row">
+              <div class="font-weight-bolder text-capitalize col-8 col-sm-9"><%= friend.email %></div>
+              <div class="ml-auto">
+                <% if shared?(current_user.id, friend.id, @todo.id).nil? %>
+                  <%= button_to "Share", shares_path, method: :post,
+                  params: {sharer_id: current_user.id, friend_id: friend.id, todo_id: @todo.id}, class: "btn btn-info" %>
+                <% else %>
+                  <%= button_to "Unshare", share_path(shared?(current_user.id, friend.id, @todo.id).id), method: :delete,
+                  params: {sharer_id: current_user.id, friend_id: friend.id, todo_id: @todo.id}, class: "btn btn-danger" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -58,3 +58,17 @@ body {
 .alert {
   margin-bottom: 0;
 }
+
+.span-prio-r {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  z-index: 1;
+}
+
+.span-prio-t {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+}

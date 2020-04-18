@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :friends, except: [:edit, :update]
   put "/friends/status", to: "friends#status", as: "status_friend"
   post "/friends/status", to: "friends#status"
+  resources :shares, except: [:new, :edit, :update]
 end
