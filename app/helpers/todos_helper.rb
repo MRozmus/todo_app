@@ -58,4 +58,8 @@ module TodosHelper
     user_signed_in? && Todo.where(guest_id: session[:guest_id]).find_by(user_id: nil).present?
   end
 
+  def todo_share?(todo_id)
+    " | Shared" if Share.find_by(todo_id: todo_id).present?
+  end
+
 end

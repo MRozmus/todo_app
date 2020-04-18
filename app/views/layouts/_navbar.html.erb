@@ -26,6 +26,7 @@
     <div class="navbar-nav">
       <% if user_signed_in? %>
         <%= link_to "Friends", friends_path, class: "btn btn-light rounded-pill border mx-1 my-1 my-lg-0" %>
+        <%= link_to "Share", shares_path, class: "btn btn-light rounded-pill border mx-1 my-1 my-lg-0" %>
         <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "btn btn-light rounded-pill border mx-1 my-1 my-lg-0" %>
       <% else %>
         <%= link_to "Sign in", new_user_session_path, class: "btn btn-light rounded-pill border mx-1 my-1 my-lg-0" %>

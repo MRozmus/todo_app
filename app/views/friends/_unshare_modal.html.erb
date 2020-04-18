@@ -1,0 +1,20 @@
+<button type="button" class="btn btn-danger ml-auto col-4 col-sm-3 ml-1" data-toggle="modal" data-target="#modalDismiss">
+  Unshare
+</button>
+<div class="modal fade" id="modalDismiss" tabindex="-1" role="dialog" aria-labelledby="modalDismissLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDismissLabel">Confirm</h5>
+      </div>
+      <div class="modal-body">
+        Do you really want to unshare <strong><%= render_todo.title %></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= button_to "Unshare", share_path(shared?(current_user.id, @friend.id, render_todo.id).id), method: :delete,
+        params: {sharer_id: render_todo.user_id, friend_id: @friend.id, todo_id: render_todo.id}, class: "btn btn-danger m-1" %>
+      </div>
+    </div>
+  </div>
+</div>

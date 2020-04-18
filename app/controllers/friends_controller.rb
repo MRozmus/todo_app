@@ -32,8 +32,10 @@ class FriendsController < ApplicationController
   def destroy
     user = User.find(params[:id])
     Relation.find_by(sender_id: current_user.id, receiver_id: user.id).nil? ?
-    Relation.find_by(sender_id: user.id, receiver_id: current_user.id).destroy :
-    Relation.find_by(sender_id: current_user.id, receiver_id: user.id).destroy
+    relation = Relation.find_by(sender_id: user.id, receiver_id: current_user.id) :
+    relation = Relation.find_by(sender_id: current_user.id, receiver_id: user.id)
+    relation.destroy
+    Share.where(relation_id: relation.id).each {|share| share.destroy}
     flash[:notice] = "#{user.email} isn't your friend no more!"
     redirect_to friends_path
   end
@@ -64,6 +66,11 @@ class FriendsController < ApplicationController
   def friend_find
     if User.find_by(id: params[:id]).present?
       @friend = User.find(params[:id])
+      todo_ids = []
+      Share.where(sharer_id: current_user.id, receiver_id: @friend.id).each do |share|
+        todo_ids << share.todo_id
+      end
+      @todos = Todo.where(id: todo_ids)
       redirect_to friends_path if Relation.find_by(sender_id: current_user.id, receiver_id: @friend.id).nil? && Relation.find_by(sender_id: @friend.id, receiver_id: current_user.id).nil?
     else
       redirect_to friends_path

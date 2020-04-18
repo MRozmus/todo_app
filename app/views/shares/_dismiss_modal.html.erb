@@ -1,0 +1,20 @@
+<button type="button" class="btn btn-danger m-1" data-toggle="modal" data-target="#modalDismiss">
+  Dismiss
+</button>
+<div class="modal fade" id="modalDismiss" tabindex="-1" role="dialog" aria-labelledby="modalDismissLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDismissLabel">Confirm</h5>
+      </div>
+      <div class="modal-body">
+        Do you really want to dismiss <strong><%= @todo.title %></strong>?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <%= button_to "Dismiss", share_path(params[:id]), method: :delete,
+        params: {sharer_id: @todo.user_id, friend_id: current_user.id, todo_id: @todo.id}, class: "btn btn-danger m-1" %>
+      </div>
+    </div>
+  </div>
+</div>
