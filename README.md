@@ -23,9 +23,8 @@ Features:
 
 * Authentication system (Devise)
 
+* User has ability to share tasks with other users
 
 Upcoming features:
 
 * Add pagination (Kaminari)
-
-* Add ability to share tasks with other users
