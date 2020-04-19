@@ -40,6 +40,7 @@ class TodosController < ApplicationController
 
   def destroy
     todo = Todo.find(params[:id])
+    Share.where(todo_id: todo.id).each {|share| share.destroy}
     todo.destroy
     flash[:notice] = "#{todo.title} deleted!"
     redirect_to todos_path
