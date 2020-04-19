@@ -53,7 +53,7 @@ body {
 
 body::after {
   content: "";
-  background: url("background.png");
+  background: image_url("background.png");
   opacity: 0.1;
   top: 0;
   left: -20px;
