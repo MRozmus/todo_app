@@ -8,7 +8,7 @@
       <%= simple_format(@todo.description, class: "card-text") %>
       <%= link_to "Back", params[:friend].nil? ? todos_path : friend_path(params[:friend]) , class: "btn btn-primary m-1" %>
       <%= link_to "Edit", edit_todo_path(@todo.id), class: "btn btn-dark m-1" %>
-      <%= render "shares/todo_share_modal" %>
+      <%= render "shares/todo_share_modal" if user_signed_in? %>
       <%= render "todos/delete_modal" %>
       <span class="badge span-prio mt-5 text-muted">Priority: <%= read_priority(@todo.priority) %><%= todo_share?(@todo.id) %></span>
     </div>

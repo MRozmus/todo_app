@@ -100,13 +100,15 @@ class TodosController < ApplicationController
   end
 
   def friends_find
-    relations_true = Relation.where(sender_id: current_user.id, status: true).or(Relation.where(receiver_id: current_user.id, status: true))
-    @relations_false = Relation.where(receiver_id: current_user.id, status: false)
-    friends_id = []
-    relations_true.each do |relation|
-      relation.sender_id == current_user.id ? friends_id << relation.receiver_id : friends_id << relation.sender_id
+    if user_signed_in?
+      relations_true = Relation.where(sender_id: current_user.id, status: true).or(Relation.where(receiver_id: current_user.id, status: true))
+      @relations_false = Relation.where(receiver_id: current_user.id, status: false)
+      friends_id = []
+      relations_true.each do |relation|
+        relation.sender_id == current_user.id ? friends_id << relation.receiver_id : friends_id << relation.sender_id
+      end
+      @friends = User.where(id: friends_id)
     end
-    @friends = User.where(id: friends_id)
   end
 
 end
