@@ -51,6 +51,18 @@ body {
   @extend .d-flex, .flex-column, .h-100;
 }
 
+body::after {
+  content: "";
+  background: url("background.png");
+  opacity: 0.1;
+  top: 0;
+  left: -20px;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;
+}
+
 @media all and (max-width:991px) {
   .btn-lg-block { width: 100%; display:block; }
 }
