@@ -25,9 +25,10 @@
       <% @friends.each do |friend| %>
         <li class="list-group-item">
           <div class="row">
-            <div class="font-weight-bolder text-capitalize text-truncate col-7 col-sm-8 p-2"><%= friend.email %></div>
+            <div class="font-weight-bolder text-capitalize text-truncate col-7 col-sm-8"><%= friend.email %></div>
             <%= link_to "Show", friend_path(friend.id), class: "btn btn-primary ml-auto col-3" %>
           </div>
+          <span class='span-prio badge badge-light'>Shared: <%= friend_shares_count(friend.id) %></span>
         </li>
       <% end %>
     </ul>
