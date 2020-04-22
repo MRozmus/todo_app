@@ -6,6 +6,8 @@ class CreateTodos < ActiveRecord::Migration[6.0]
       t.integer :priority
       t.boolean :status
       t.references :guest
+      t.references :user
+      t.references :share
 
       t.timestamps
     end
