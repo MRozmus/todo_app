@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_15_170843) do
+ActiveRecord::Schema.define(version: 2020_04_18_114314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2020_04_15_170843) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["recipient_id"], name: "index_relations_on_recipient_id"
     t.index ["sender_id"], name: "index_relations_on_sender_id"
+  end
+
+  create_table "shares", force: :cascade do |t|
+    t.bigint "sender_id"
+    t.bigint "recipient_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["recipient_id"], name: "index_shares_on_recipient_id"
+    t.index ["sender_id"], name: "index_shares_on_sender_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -63,4 +72,6 @@ ActiveRecord::Schema.define(version: 2020_04_15_170843) do
 
   add_foreign_key "relations", "users", column: "recipient_id"
   add_foreign_key "relations", "users", column: "sender_id"
+  add_foreign_key "shares", "users", column: "recipient_id"
+  add_foreign_key "shares", "users", column: "sender_id"
 end
